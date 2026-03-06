@@ -40,8 +40,8 @@ The objective of this lab is to understand how cloud infrastructure works and ho
 1. Login to AWS Console
 2. Navigate to EC2 Dashboard
 3. Click **Launch Instance**
-4. Select **Amazon Linux 2023**
-5. Choose **t2.micro (Free Tier)**
+4. Select **Amazon Linux AMI**
+5. Choose **t3.micro (Free Tier)**
 
 ---
 
@@ -86,7 +86,7 @@ Open the EC2 public IP in the browser.
 Example:
 
 ```
-http://YOUR_PUBLIC_IP
+http://44.210.134.72
 ```
 
 ---
@@ -103,11 +103,11 @@ http://YOUR_PUBLIC_IP
 
 ## EC2 Instance Running
 
-![Instance](screenshots/ec2-instance.png)
+![Instance](ec2-web-server\screenshots\ec2-instance.png)
 
 ## Website Output
 
-![Website](screenshots/website-output.png)
+![Website](ec2-web-server\screenshots\website-output.png)
 
 ---
 
