@@ -1,1 +1,0 @@
-# aws-cloud-hands-on-labs
