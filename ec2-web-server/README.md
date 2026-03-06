@@ -103,11 +103,11 @@ http://44.210.134.72
 
 ## EC2 Instance Running
 
-![Instance](ec2-web-server\screenshots\ec2-instance.png)
+![Instance](screenshots/ec2-instance.png)
 
 ## Website Output
 
-![Website](ec2-web-server\screenshots\website-output.png)
+![Website](screenshots/website-output.png)
 
 ---
 
