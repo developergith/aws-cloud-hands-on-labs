@@ -16,7 +16,7 @@ In this project we will:
 ---
 
 # Architecture Diagram
-
+![S3 Architecture](architecture.png)
 ```
                 User
                  │
@@ -221,7 +221,27 @@ aws-cloud-hands-on-labs
 
 # Screenshots
 
-(Add screenshots after completing the deployment)
+## S3 Bucket Created
+
+![Bucket Created](screenshots/bucket-name.png)
+
+---
+
+## Files Uploaded to S3
+
+![Files Uploaded](screenshots/bucket-upload.png)
+
+---
+
+## Static Website Hosting Enabled
+
+![Static Hosting](screenshots/static-website-hosting.png)
+
+---
+
+## Website Output
+
+![Website Output](screenshots/hosted-web.png)
 
 Examples:
 
