@@ -78,7 +78,7 @@ Files inside bucket:
 ```
 index.html
 style.css
-script.js
+script.js....
 ```
 
 ---
@@ -128,9 +128,7 @@ Example code:
 <title>AWS S3 Website</title>
 </head>
 <body>
-
-<h1>Hello from AWS S3</h1>
-<p>This website is hosted using Amazon S3 Static Website Hosting</p>
+ <h1>My-Portfolio</h1>
 
 </body>
 </html>
@@ -211,10 +209,10 @@ aws-cloud-hands-on-labs
     ├── README.md
     ├── architecture.png
     └── screenshots
-        ├── bucket-created.png
-        ├── files-uploaded.png
+        ├── bucket-Name.png
+        ├── bucket-upload.png
         ├── static-hosting-enabled.png
-        └── website-output.png
+        └── hosted-web.png
 ```
 
 ---
