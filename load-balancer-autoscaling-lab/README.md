@@ -269,31 +269,31 @@ This architecture ensures:
 
 ## Load Balancer Created
 
-![Load Balancer](screenshots/Load balancer created.png)
+![Load Balancer](screenshots/Load-balancer-created.png)
 
 ---
 
 ## Target Group Healthy
 
-![Target Group](screenshots/Target group.png)
+![Target Group](screenshots/Target-group.png)
 
 ---
 
 ## EC2 Instances Running
 
-![EC2 Instances](screenshots/EC2 instances.png)
+![EC2 Instances](screenshots/EC2-instances.png)
 
 ---
 
 ## Auto Scaling Group
 
-![Auto Scaling](screenshots/Auto scaling group.png)
+![Auto Scaling](screenshots/Auto-scaling-group.png)
 
 ---
 
 ## Load Balancer Configuration
 
-![Load Balancer Config](screenshots/Load balancer.png)
+![Load Balancer Config](screenshots/Load-balancer.png)
 
 ---
 
