@@ -1,64 +1,64 @@
-# AWS EC2 Web Server Deployment
+# AWS Application Load Balancer with Auto Scaling
 
-## Project Overview
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange)
+![EC2](https://img.shields.io/badge/AWS-EC2-blue)
+![LoadBalancer](https://img.shields.io/badge/AWS-ALB-red)
+![AutoScaling](https://img.shields.io/badge/AWS-AutoScaling-green)
 
-This project demonstrates how to deploy a web server on an EC2 instance using Amazon Linux and Apache.
+---
 
-The objective of this lab is to understand how cloud infrastructure works and how a website can be hosted on a virtual machine running in the cloud.
+# Project Overview
+
+This project demonstrates how to build a **highly available and scalable web architecture on AWS** using:
+
+* Amazon EC2
+* Application Load Balancer
+* Target Groups
+* Auto Scaling Groups
+
+The architecture distributes incoming traffic across multiple EC2 instances and ensures high availability.
 
 ---
 
 # Architecture Diagram
 
-![Architecture](architecture.png)
+```
+                Internet
+                    │
+                    ▼
+        Application Load Balancer (ALB)
+                    │
+                    ▼
+               Target Group
+                    │
+         ┌──────────┴──────────┐
+         ▼                     ▼
+      EC2 Instance 1       EC2 Instance 2
+   (Apache Web Server)  (Apache Web Server)
+           │                    │
+           └──── Auto Scaling Group ────┘
+```
 
 ---
 
 # AWS Services Used
 
-* Amazon EC2
-* Security Groups
-* Amazon VPC
-* Internet Gateway
-* Apache Web Server
+| Service                   | Purpose                       |
+| ------------------------- | ----------------------------- |
+| EC2                       | Host web servers              |
+| Application Load Balancer | Distribute traffic            |
+| Target Group              | Manage EC2 instances          |
+| Auto Scaling Group        | Automatically scale instances |
+| Security Groups           | Control network access        |
+| VPC                       | Networking                    |
 
 ---
 
-# Architecture Explanation
+# Step 1 – Launch EC2 Instance
 
-1. A user sends an HTTP request from a browser.
-2. The request travels through the internet.
-3. AWS Security Group allows traffic on port **80 (HTTP)**.
-4. The request reaches the **EC2 Instance** running Amazon Linux.
-5. Apache Web Server processes the request.
-6. The hosted HTML page is returned to the user.
+EC2 instance was launched using Amazon Linux.
 
----
-
-# Step 1 — Launch EC2 Instance
-
-1. Login to AWS Console
-2. Navigate to EC2 Dashboard
-3. Click **Launch Instance**
-4. Select **Amazon Linux AMI**
-5. Choose **t3.micro (Free Tier)**
-
----
-
-# Step 2 — Configure Security Group
-
-Allow the following inbound rules:
-
-| Type | Port | Purpose       |
-| ---- | ---- | ------------- |
-| SSH  | 22   | Remote access |
-| HTTP | 80   | Web traffic   |
-
----
-
-# Step 3 — Install Apache Web Server
-
-Run the following commands inside EC2 terminal.
+Install Apache Web Server
 
 ```
 sudo dnf update -y
@@ -67,81 +67,192 @@ sudo systemctl start httpd
 sudo systemctl enable httpd
 ```
 
----
-
-# Step 4 — Deploy Website
-
-Create a simple HTML file.
+Create test page
 
 ```
-echo "<h1>Hello from AWS EC2</h1>" | sudo tee /var/www/html/index.html
+echo "<h1>Hello from Load Balancer Demo - Ayush</h1>" | sudo tee /var/www/html/index.html
 ```
 
 ---
 
-# Step 5 — Access the Website
+# Step 2 – Create Target Group
 
-Open the EC2 public IP in the browser.
-
-Example:
+Configuration:
 
 ```
-http://44.210.134.72
+Target type : Instance
+Protocol : HTTP
+Port : 80
+Health Check Path : /
+```
+
+EC2 instances were registered to the target group.
+
+---
+
+# Step 3 – Create Application Load Balancer
+
+Configuration:
+
+```
+Scheme : Internet Facing
+Listener : HTTP (Port 80)
+Forward to → Target Group
+```
+
+Load Balancer distributes traffic across EC2 instances.
+
+---
+
+# Step 4 – Configure Security Groups
+
+Load Balancer Security Group
+
+```
+HTTP 80 → 0.0.0.0/0
+```
+
+EC2 Security Group
+
+```
+HTTP 80 → 0.0.0.0/0
+SSH 22 → My IP
 ```
 
 ---
 
-# Screenshots
+# Step 5 – Create Auto Scaling Group
 
-## AWS Dashboard
+Auto Scaling configuration:
 
-![AWS](screenshots/aws-dash.png)
+```
+Desired Capacity : 2
+Minimum Capacity : 2
+Maximum Capacity : 4
+```
 
-## Launch Instance
-
-![Launch](screenshots/Launch-instance.png)
-
-## EC2 Instance Running
-
-![Instance](screenshots/ec2-instance.png)
-
-## Website Output
-
-![Website](screenshots/website-output.png)
+This ensures that the system automatically launches new instances if one fails.
 
 ---
 
-# Project Structure
+# Troubleshooting Issues
+
+## Issue 1 – Load Balancer DNS not working
+
+Error:
 
 ```
-aws-cloud-hands-on-labs
-│
-└── ec2-web-server
-    │
-    ├── README.md
-    ├── architecture.png
-    └── screenshots
-        ├── aws-dash.png
-        ├── Launch-instance.png
-        ├── ec2-instance.png
-        └── website-output.png
+ERR_CONNECTION_TIMED_OUT
+```
+
+Cause
+
+Load Balancer security group did not allow HTTP traffic.
+
+Fix
+
+Added inbound rule
+
+```
+HTTP 80 → 0.0.0.0/0
 ```
 
 ---
 
-# Learning Outcomes
+## Issue 2 – Apache service inactive
 
-After completing this project you will understand:
+Check status
 
-* How to launch an EC2 instance
-* How to configure security groups
-* How to install Apache web server
-* How to host a website on AWS
-* Basic cloud architecture
+```
+sudo systemctl status httpd
+```
+
+Fix
+
+```
+sudo systemctl start httpd
+```
+
+---
+
+## Issue 3 – SSH Permission Denied
+
+Error
+
+```
+Permission denied (publickey)
+```
+
+Fix
+
+```
+ssh -i ai-key.pem ec2-user@public-ip
+```
+
+---
+
+# Final Architecture
+
+```
+User
+ │
+Internet
+ │
+Application Load Balancer
+ │
+Target Group
+ │
+Auto Scaling Group
+ │
+EC2 Instances
+ │
+Apache Web Server
+```
+
+This architecture provides:
+
+* High Availability
+* Load Distribution
+* Scalability
+* Fault Tolerance
+
+---
+
+# Project Screenshots
+
+## Load Balancer Created
+
+![Load Balancer](screenshots/Load-balancer-DNS-working.png)
+
+---
+
+## Target Group Healthy
+
+![Target Group](screenshots/Target-group-healthy.png)
+
+---
+
+## EC2 Instances Running
+
+![EC2 Instances](screenshots/EC2-instances-running.png)
+
+---
+
+## Auto Scaling Group
+
+![Auto Scaling](screenshots/Auto-scaling-group.png)
+
+---
+
+## Load Balancer Configuration
+
+![Load Balancer Config](screenshots/Load-balancer-DNS-working.png)
 
 ---
 
 # Author
 
 Ayush Nath Motichur
-AWS Cloud Hands-On Labs
+
+Cloud & DevOps Enthusiast
+
