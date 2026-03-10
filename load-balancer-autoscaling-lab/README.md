@@ -269,19 +269,19 @@ This architecture ensures:
 
 ## Load Balancer Created
 
-![Load Balancer](screenshots/Load-balancer-created.png)
+![Load Balancer](screenshots/Load-balancer-DNS-working.png)
 
 ---
 
 ## Target Group Healthy
 
-![Target Group](screenshots/Target-group.png)
+![Target Group](screenshots/Target-group-healthy.png)
 
 ---
 
 ## EC2 Instances Running
 
-![EC2 Instances](screenshots/EC2-instances.png)
+![EC2 Instances](screenshots/EC2-instances-running.png)
 
 ---
 
@@ -293,7 +293,7 @@ This architecture ensures:
 
 ## Load Balancer Configuration
 
-![Load Balancer Config](screenshots/Load-balancer.png)
+![Load Balancer Config](screenshots/Load-balancer-DNS-working.png)
 
 ---
 
