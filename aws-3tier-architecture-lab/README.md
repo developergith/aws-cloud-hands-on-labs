@@ -261,13 +261,13 @@ Welcome to the MariaDB monitor
 
 ## EC2 Instances
 
-![EC2](screenshots/ec2-instances.png)
+![EC2](screenshots/ec2-instance.png)
 
 ---
 
 ## Launch Template
 
-![Launch Template](screenshots/Launch-template.png)
+![Launch Template](screenshots/launch-templat.png)
 
 ---
 
@@ -285,7 +285,7 @@ Welcome to the MariaDB monitor
 
 ## Auto Scaling Group
 
-![Auto Scaling](screenshots/autoscaling-group.png)
+![Auto Scaling](screenshots/autoscaling.png)
 
 ---
 
